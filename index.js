@@ -1,6 +1,7 @@
 
 let newTable, newEditor;
 
+
 function readFile(input) {
     let file = input.files[0];
     let reader = new FileReader();

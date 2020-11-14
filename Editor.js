@@ -27,7 +27,8 @@ class Editor {
 			text += (i == rows.length-1) ? '' : '\n';
         }
         return text;
-    }
+	}
+	
 
     download(filename, text) {
         var element = document.createElement('a');

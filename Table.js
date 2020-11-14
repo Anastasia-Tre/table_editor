@@ -6,6 +6,7 @@ class Table {
 		
 		this.elemTable = document.createElement('table');
 		this.elemTable.classList.add('highlight');
+
 		
 		const tableContainer = document.getElementById('table_container');
 		tableContainer.innerHTML = '';
