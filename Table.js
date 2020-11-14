@@ -6,6 +6,7 @@ class Table {
 		
 		this.elemTable = document.createElement('table');
 		this.elemTable.classList.add('highlight');
+		
 		const tableContainer = document.getElementById('table_container');
 		tableContainer.innerHTML = '';
 		tableContainer.appendChild(this.elemTable);
@@ -17,7 +18,6 @@ class Table {
 
 		this.createHeader(data.headers);
 		this.createRow(data.data);
-
     }
 
     createHeader(array) {  
@@ -96,7 +96,6 @@ class Table {
 				</div>`
 		
 		container.innerHTML = elemModal;
-		console.log(element);
 		const modal = M.Modal.init(document.getElementById('modal'));
 		const newText = document.getElementById('newText');
 		newText.defaultValue = element.target.innerHTML;
@@ -105,8 +104,5 @@ class Table {
 			element.target.innerHTML = newText.value;
 			container.innerHTML = '';
 		});
-  }
-
+  	}
 }
-
-

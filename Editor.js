@@ -26,7 +26,6 @@ class Editor {
 			}
 			text += (i == rows.length-1) ? '' : '\n';
         }
-        
         return text;
     }
 
@@ -39,5 +38,4 @@ class Editor {
         element.click();
         document.body.removeChild(element);
     }
-
 }
