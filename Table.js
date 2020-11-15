@@ -1,7 +1,12 @@
+'use strict';
+
+let prElement = '', prOldValue = '';
 
 class Table {
     constructor(name, data) {
-		this.logs = [];
+		this.previousElement = prElement;
+		this.previousValue = prOldValue;
+
 		this.filename = name;
 		
 		this.elemTable = document.createElement('table');
@@ -94,14 +99,23 @@ class Table {
 					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
 					<a class="modal-close waves-effect waves-green btn-flat" id="ok">OK</a>
 				</div>
-				</div>`
+				</div>`;
 		
 		container.innerHTML = elemModal;
 		const modal = M.Modal.init(document.getElementById('modal'));
 		const newText = document.getElementById('newText');
 		newText.defaultValue = element.target.innerHTML;
 		const okBtn = document.getElementById('ok');
+
+		this.previousElement = prElement;
+		this.previousValue = prOldValue;
+		console.log(this.previousValue);
+
 		okBtn.addEventListener('click', () => {
+			
+			prElement = element.target;
+			prOldValue = element.target.innerHTML;
+
 			element.target.innerHTML = newText.value;
 			container.innerHTML = '';
 		});

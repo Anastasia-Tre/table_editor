@@ -1,3 +1,4 @@
+'use strict';
 
 let newTable, newEditor;
 
@@ -8,7 +9,7 @@ function readFile(input) {
     reader.readAsText(file);
   
     reader.onload = function() {
-    newEditor = new Editor();
+    	newEditor = new Editor();
 		const data = newEditor.parseFile(reader.result);
 		newTable = new Table(file.name, data);
 
@@ -28,7 +29,14 @@ function readFile(input) {
 			let text = newEditor.tableToText(headers, rows);
 			let filename = newTable.filename;
 			newEditor.download(filename, text);
-		}, false);    
+		}, false);
+		
+		const undoBtn = document.getElementById('undo');
+		undoBtn.addEventListener('click', function() {
+			const element = prElement;
+			element.innerHTML = prOldValue;
+			console.log(element);
+		});
 
   	};
   
