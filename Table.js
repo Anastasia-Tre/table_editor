@@ -1,18 +1,17 @@
 'use strict';
 
-let prElement = '', prOldValue = '';
-
 class Table {
+	
+	static previousElement;
+	static previousValue;
+
     constructor(name, data) {
-		this.previousElement = prElement;
-		this.previousValue = prOldValue;
 
 		this.filename = name;
 		
 		this.elemTable = document.createElement('table');
 		this.elemTable.classList.add('highlight');
 
-		
 		const tableContainer = document.getElementById('table_container');
 		tableContainer.innerHTML = '';
 		tableContainer.appendChild(this.elemTable);
@@ -107,14 +106,15 @@ class Table {
 		newText.defaultValue = element.target.innerHTML;
 		const okBtn = document.getElementById('ok');
 
-		this.previousElement = prElement;
-		this.previousValue = prOldValue;
-		console.log(this.previousValue);
-
 		okBtn.addEventListener('click', () => {
 			
-			prElement = element.target;
-			prOldValue = element.target.innerHTML;
+			// тут this берется события, а не класса, поетому 
+			// лучше использовать статические свойства метода
+			// для реализации коректной работы
+			// prElement = element.target;
+			Table.previousElement = element.target;
+			Table.previousValue = element.target.innerHTML;
+			// prOldValue = element.target.innerHTML;
 
 			element.target.innerHTML = newText.value;
 			container.innerHTML = '';

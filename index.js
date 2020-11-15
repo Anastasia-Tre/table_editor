@@ -33,9 +33,8 @@ function readFile(input) {
 		
 		const undoBtn = document.getElementById('undo');
 		undoBtn.addEventListener('click', function() {
-			const element = prElement;
-			element.innerHTML = prOldValue;
-			console.log(element);
+			const element = Table.previousElement;
+			element.innerHTML = Table.previousValue;
 		});
 
   	};
