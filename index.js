@@ -1,5 +1,7 @@
 'use strict';
 
+// добавить коментариев
+
 let newTable, newEditor;
 
 

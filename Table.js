@@ -89,6 +89,7 @@ class Table {
 
 		const container = document.getElementById('modal-container');
 		
+		// переписать эту часть!
 		const elemModal = `<div id="modal" class="modal">
 				<div class="modal-content">
 					<h4>Modal Header</h4>

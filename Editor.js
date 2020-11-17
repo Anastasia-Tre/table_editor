@@ -1,5 +1,8 @@
 'use strict';
 
+// изменить разбиение с запятой на табуляцию
+// добавить окошко на запрос имени файла
+
 class Editor {
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
