@@ -121,7 +121,7 @@ class Table {
 
 		const cancelBtn = document.createElement('a');
 		cancelBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
-		cancelBtn.setAttribute('href', '#!');
+		// cancelBtn.setAttribute('href', '#!');
 		cancelBtn.innerHTML = 'Cancel';
 		modalFooter.appendChild(cancelBtn);
 		const okBtn = document.createElement('a');
@@ -152,5 +152,6 @@ class Table {
 			element.target.innerHTML = modalInput.value;
 			container.innerHTML = '';
 		});
-  	}
+	  }
+	  
 }

@@ -29,8 +29,8 @@ function readFile(input) {
 			const headers = newTable.elemHeader.querySelectorAll("th");
 			const rows = newTable.elemBody.querySelectorAll("tr");
 			let text = newEditor.tableToText(headers, rows);
-			let filename = newTable.filename;
-			newEditor.download(filename, text);
+			let filename =  newTable.filename;
+			openModal(filename, text);
 		}, false);
 		
 		const undoBtn = document.getElementById('undo');
@@ -45,4 +45,52 @@ function readFile(input) {
       	console.log(reader.error);
     };
   
+}
+
+
+function openModal(filename, text) {
+	console.log('zaschol');
+	let newFilename = '';
+	const container = document.getElementById('modal-container');
+
+	const elemModal = document.createElement('div');
+	elemModal.classList.add('modal');
+	elemModal.id = 'modal';
+	container.appendChild(elemModal);
+	const modalContent = document.createElement('div');
+	modalContent.classList.add('modal-content');
+	elemModal.appendChild(modalContent);
+	const modalFooter = document.createElement('div');
+	modalFooter.classList.add('modal-footer');
+	elemModal.appendChild(modalFooter);
+
+	const modalHeader = document.createElement('h4');
+	modalHeader.innerHTML = 'Save as';
+	modalContent.appendChild(modalHeader);
+	const modalInput = document.createElement('input');
+	modalInput.setAttribute('type', 'text');
+	modalContent.appendChild(modalInput);
+
+	const cancelBtn = document.createElement('a');
+	cancelBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
+	cancelBtn.innerHTML = 'Cancel';
+	modalFooter.appendChild(cancelBtn);
+	const saveBtn = document.createElement('a');
+	saveBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
+	saveBtn.innerHTML = 'Save';
+	modalFooter.appendChild(saveBtn);
+	
+	const modal = M.Modal.init(document.getElementById('modal'));
+	modalInput.defaultValue = filename;
+	
+	cancelBtn.addEventListener('click', () => {
+		container.innerHTML = '';
+	});
+	saveBtn.addEventListener('click', () => {
+		
+		newFilename = modalInput.value || filename;
+		container.innerHTML = '';
+		newEditor.download(newFilename, text);
+	});
+
 }
