@@ -90,7 +90,7 @@ class Table {
 		const container = document.getElementById('modal-container');
 		
 		// переписать эту часть!
-		const elemModal = `<div id="modal" class="modal">
+		const elemModal1 = `<div id="modal" class="modal">
 				<div class="modal-content">
 					<h4>Modal Header</h4>
 					<input type="text" id="newText">
@@ -100,13 +100,45 @@ class Table {
 					<a class="modal-close waves-effect waves-green btn-flat" id="ok">OK</a>
 				</div>
 				</div>`;
-		
-		container.innerHTML = elemModal;
-		const modal = M.Modal.init(document.getElementById('modal'));
-		const newText = document.getElementById('newText');
-		newText.defaultValue = element.target.innerHTML;
-		const okBtn = document.getElementById('ok');
 
+		const elemModal = document.createElement('div');
+		elemModal.classList.add('modal');
+		elemModal.id = 'modal';
+		container.appendChild(elemModal);
+		const modalContent = document.createElement('div');
+		modalContent.classList.add('modal-content');
+		elemModal.appendChild(modalContent);
+		const modalFooter = document.createElement('div');
+		modalFooter.classList.add('modal-footer');
+		elemModal.appendChild(modalFooter);
+
+		const modalHeader = document.createElement('h4');
+		modalHeader.innerHTML = 'Change the cell';
+		modalContent.appendChild(modalHeader);
+		const modalInput = document.createElement('input');
+		modalInput.setAttribute('type', 'text');
+		modalContent.appendChild(modalInput);
+
+		const cancelBtn = document.createElement('a');
+		cancelBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
+		cancelBtn.setAttribute('href', '#!');
+		cancelBtn.innerHTML = 'Cancel';
+		modalFooter.appendChild(cancelBtn);
+		const okBtn = document.createElement('a');
+		okBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
+		okBtn.innerHTML = 'OK';
+		modalFooter.appendChild(okBtn);
+		
+		//container.innerHTML = elemModal;
+		const modal = M.Modal.init(document.getElementById('modal'));
+		//const modal = M.Modal.init(elemModal);
+		//const newText = document.getElementById('newText');
+		modalInput.defaultValue = element.target.innerHTML;
+		//const okBtn = document.getElementById('ok');
+
+		cancelBtn.addEventListener('click', () => {
+			container.innerHTML = '';
+		});
 		okBtn.addEventListener('click', () => {
 			
 			// тут this берется события, а не класса, поетому 
@@ -117,7 +149,7 @@ class Table {
 			Table.previousValue = element.target.innerHTML;
 			// prOldValue = element.target.innerHTML;
 
-			element.target.innerHTML = newText.value;
+			element.target.innerHTML = modalInput.value;
 			container.innerHTML = '';
 		});
   	}
