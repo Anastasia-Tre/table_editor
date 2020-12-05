@@ -42,14 +42,12 @@ function readFile(input) {
 			const element = Table.previousElement;
 			element.innerHTML = Table.previousValue;
 		});
-
   	};
   
 	// Обробник для помилок, при читанні файлу
     reader.onerror = function() {
       	console.log(reader.error);
     };
-  
 }
 
 
@@ -103,5 +101,4 @@ function openModal(filename, text) {
 		container.innerHTML = '';
 		newEditor.download(newFilename, text);
 	});
-
 }

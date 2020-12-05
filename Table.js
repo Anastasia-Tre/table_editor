@@ -15,12 +15,11 @@ class Table {
 
 		const tableContainer = document.getElementById('table_container');
 		tableContainer.innerHTML = '';
-		tableContainer.appendChild(this.elemTable);
+		tableContainer.append(this.elemTable);
 		
 		this.elemHeader = document.createElement('thead');
-		this.elemTable.appendChild(this.elemHeader); 
 		this.elemBody = document.createElement('tbody');
-		this.elemTable.appendChild(this.elemBody); 
+		this.elemTable.append(this.elemHeader, this.elemBody); 
 		this.createHeader(data.headers);
 		this.createRow(data.data);
     }
@@ -28,13 +27,13 @@ class Table {
 	// Створення рядку заколовків таблиці
     createHeader(array) {  
 		const elemRow = document.createElement('tr');
-		this.elemHeader.appendChild(elemRow);
+		this.elemHeader.append(elemRow);
 
 		array.map( (value) => {
 			const elemCell = document.createElement('th');
 			elemCell.classList.add('sort');
 			elemCell.innerHTML = value;
-			elemRow.appendChild(elemCell);
+			elemRow.append(elemCell);
 		});    
     }
 
@@ -42,7 +41,7 @@ class Table {
     createRow(array) {
 		for (let row of array) {
 			const elemRow = document.createElement('tr');
-			this.elemBody.appendChild(elemRow);
+			this.elemBody.append(elemRow);
 			
 			for (let i = 0; i < this.elemHeader.children[0].children.length; i++) {
 				const elemCell = document.createElement('td');
@@ -50,7 +49,7 @@ class Table {
 				elemCell.addEventListener('click', this.openModal);
 				elemCell.setAttribute("href", "#modal")
 				elemCell.innerHTML = row[i] || '';
-				elemRow.appendChild(elemCell);
+				elemRow.append(elemCell);
 			}
 		}
     }
@@ -69,11 +68,9 @@ class Table {
             return aCol > bCol ? (1 * mod) : (-1 * mod);
         });
       
-		// Видалення всіх рядків таблиці
-        while (this.elemBody.firstChild) {
-            this.elemBody.removeChild(this.elemBody.firstChild);
-        }
-        // Додавання відсортованих рядків
+		// Видалення всіх рядків таблиці і
+		// додавання відсортованих рядків
+		this.elemBody.innerHTML = '';
 		this.elemBody.append(...sortedRows);
 		
 		// Позначеняя колонки за якою зараз відсортовані дані

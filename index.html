@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
-
-    <title>Table</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+  <title>Table</title>
 </head>
+
 <style>
   .myfile {
   width: 0.1px;
@@ -15,24 +15,22 @@
   overflow: hidden;
   position: absolute;
   z-index: -1;
-}
+  }
 
-.th-sort-asc::after {
-  content: "\25b4";
-}
+  .th-sort-asc::after {
+    content: "\25b4";
+  }
 
-.th-sort-desc::after {
-  content: "\25be";
+  .th-sort-desc::after {
+    content: "\25be";
 }
-
 </style>
 
 <body>
     <div class="container">
         <h2>Table Editor</h2>
-	</div>
+	  </div>
 	
-
     <div class="container">
         <div class="row">
             <label for="myfile" class="waves-effect waves-light btn blue" title="Open file">Open</label>
