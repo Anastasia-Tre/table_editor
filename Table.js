@@ -46,9 +46,24 @@ class Table {
 			for (let i = 0; i < this.elemHeader.children[0].children.length; i++) {
 				const elemCell = document.createElement('td');
 				elemCell.classList.add('modal-trigger');
-				elemCell.addEventListener('click', this.openModal);
 				elemCell.setAttribute("href", "#modal")
 				elemCell.innerHTML = row[i] || '';
+				elemCell.addEventListener('click', function() {
+					const element = elemCell;
+					const options = {
+						argForFn: {element},
+						defaultValue: element.innerHTML,				
+						headerText: 'Change the cell',
+						btnText: 'OK',
+						fnForBtn: ({element, modalInput}) => {
+							Table.previousElement = element;
+							Table.previousValue = element.innerHTML;
+							element.innerHTML = modalInput;
+						}
+					}
+					newTable.openModal(options);
+				});
+				
 				elemRow.append(elemCell);
 			}
 		}
@@ -80,60 +95,53 @@ class Table {
     }
 
 	// Створення модального вінка
-    openModal(element) {
+    openModal(options) {
+		const {argForFn, defaultValue, fnForBtn, headerText, btnText} = options;
+	
+		// Створення модального вінка та необхідних елементів для нього
 		const container = document.getElementById('modal-container');
 		const elemModal = document.createElement('div');
 		elemModal.classList.add('modal');
 		elemModal.id = 'modal';
 		container.append(elemModal);
-
+	
 		const modalContent = document.createElement('div');
 		modalContent.classList.add('modal-content');
-
+	
 		const modalFooter = document.createElement('div');
 		modalFooter.classList.add('modal-footer');
 		elemModal.append(modalContent, modalFooter);
-
+	
 		const modalHeader = document.createElement('h4');
-		modalHeader.innerHTML = 'Change the cell';
-
+		modalHeader.innerHTML = headerText;
+	
 		const modalInput = document.createElement('input');
 		modalInput.setAttribute('type', 'text');
 		modalContent.append(modalHeader, modalInput);
-
+	
 		const cancelBtn = document.createElement('a');
 		cancelBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
 		cancelBtn.innerHTML = 'Cancel';
-
-		const okBtn = document.createElement('a');
-		okBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
-		okBtn.innerHTML = 'OK';
-		modalFooter.append(cancelBtn, okBtn);
+	
+		const saveBtn = document.createElement('a');
+		saveBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
+		saveBtn.innerHTML = btnText;
+		modalFooter.append(cancelBtn, saveBtn);
 		
 		const modal = M.Modal.init(document.getElementById('modal'));
-		modalInput.defaultValue = element.target.innerHTML;
-
+		modalInput.defaultValue = defaultValue;
+		
 		// Обробник для кнопки CANCEL модального вінка
-		// Знищує модальне вікно без внесення змін в таблицю
 		cancelBtn.addEventListener('click', () => {
 			container.innerHTML = '';
 		});
-
+	
 		// Обробник для кнопки SAVE модального вінка
-		// Знищує модальне вікно та зберігає файл
-		okBtn.addEventListener('click', () => {
-			
-			// тут this берется события, а не класса, поетому 
-			// лучше использовать статические свойства метода
-			// для реализации коректной работы
-			// prElement = element.target;
-			Table.previousElement = element.target;
-			Table.previousValue = element.target.innerHTML;
-			// prOldValue = element.target.innerHTML;
-
-			element.target.innerHTML = modalInput.value;
+		saveBtn.addEventListener('click', () => {
+			argForFn.modalInput = modalInput.value;
+			fnForBtn(argForFn);
 			container.innerHTML = '';
 		});
-	  }
+	}
 	  
 }

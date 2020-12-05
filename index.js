@@ -32,8 +32,19 @@ function readFile(input) {
 			const headers = newTable.elemHeader.querySelectorAll("th");
 			const rows = newTable.elemBody.querySelectorAll("tr");
 			let text = newEditor.tableToText(headers, rows);
-			let filename =  newTable.filename;
-			openModal(filename, text);
+			const filename =  newTable.filename;
+
+			const options = {
+				argForFn: { filename, text },
+				defaultValue: filename,				
+				headerText: 'Save as',
+				btnText: 'Save',
+				fnForBtn: ({filename, text, modalInput}) => {
+					const newFilename = modalInput || filename;
+					newEditor.download(newFilename, text);
+				}
+			}
+			newTable.openModal(options);
 		}, false);
 		
 		// Обробник для кнопки UNDO, відміна останньої дії
@@ -50,55 +61,3 @@ function readFile(input) {
     };
 }
 
-
-// Функція для відкриття модального вікна для вибору імені під яким зберегти файл
-function openModal(filename, text) {
-	let newFilename = '';
-
-	// Створення модального вінка та необхідних елементів для нього
-	const container = document.getElementById('modal-container');
-	const elemModal = document.createElement('div');
-	elemModal.classList.add('modal');
-	elemModal.id = 'modal';
-	container.append(elemModal);
-
-	const modalContent = document.createElement('div');
-	modalContent.classList.add('modal-content');
-
-	const modalFooter = document.createElement('div');
-	modalFooter.classList.add('modal-footer');
-	elemModal.append(modalContent, modalFooter);
-
-	const modalHeader = document.createElement('h4');
-	modalHeader.innerHTML = 'Save as';
-
-	const modalInput = document.createElement('input');
-	modalInput.setAttribute('type', 'text');
-	modalContent.append(modalHeader, modalInput);
-
-	const cancelBtn = document.createElement('a');
-	cancelBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
-	cancelBtn.innerHTML = 'Cancel';
-
-	const saveBtn = document.createElement('a');
-	saveBtn.classList.add('modal-close', 'waves-effect','waves-green', 'btn-flat');
-	saveBtn.innerHTML = 'Save';
-	modalFooter.append(cancelBtn, saveBtn);
-	
-	const modal = M.Modal.init(document.getElementById('modal'));
-	modalInput.defaultValue = filename;
-	
-	// Обробник для кнопки CANCEL модального вінка
-	// Знищує модальне вікно без збереження файлу 
-	cancelBtn.addEventListener('click', () => {
-		container.innerHTML = '';
-	});
-
-	// Обробник для кнопки SAVE модального вінка
-	// Знищує модальне вікно та зберігає файл
-	saveBtn.addEventListener('click', () => {
-		newFilename = modalInput.value || filename;
-		container.innerHTML = '';
-		newEditor.download(newFilename, text);
-	});
-}
