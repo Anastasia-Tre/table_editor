@@ -4,60 +4,60 @@ let newTable, newEditor;
 
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
 function readFile(input) {
-    let file = input.files[0];
+	let file = input.files[0];
 	let reader = new FileReader();
-	
+
 	// Читання файлу
-    reader.readAsText(file);
-  
+	reader.readAsText(file);
+
 	// Після завантаження файла, створюються екземпляри класів Editor i Table
-    reader.onload = function() {
+	reader.onload = function () {
 		newEditor = new Editor();
 		const data = newEditor.parseFile(reader.result);
 		newTable = new Table(file.name, data);
 
 		// Обробник для сортавування даних в колонках
 		document.querySelectorAll(".sort").forEach(headerCell => {
-		headerCell.addEventListener("click", () => {
+			headerCell.addEventListener("click", () => {
 				const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
 				const currentIsAscending = headerCell.classList.contains("th-sort-asc");
-			
+
 				newTable.sortTableByColumn(headerIndex, !currentIsAscending);
 			});
 		});
 
 		// Обробник для кнопки SAVE, збереження файлу
 		const saveBtn = document.getElementById('save');
-		saveBtn.addEventListener('click', function() {
+		saveBtn.addEventListener('click', function () {
 			const headers = newTable.elemHeader.querySelectorAll("th");
 			const rows = newTable.elemBody.querySelectorAll("tr");
 			let text = newEditor.tableToText(headers, rows);
-			const filename =  newTable.filename;
+			const filename = newTable.filename;
 
 			const options = {
 				argForFn: { filename, text },
-				defaultValue: filename,				
+				defaultValue: filename,
 				headerText: 'Save as',
 				btnText: 'Save',
-				fnForBtn: ({filename, text, modalInput}) => {
+				fnForBtn: ({ filename, text, modalInput }) => {
 					const newFilename = modalInput || filename;
 					newEditor.download(newFilename, text);
 				}
 			}
 			newTable.openModal(options);
 		}, false);
-		
+
 		// Обробник для кнопки UNDO, відміна останньої дії
 		const undoBtn = document.getElementById('undo');
-		undoBtn.addEventListener('click', function() {
+		undoBtn.addEventListener('click', function () {
 			const element = Table.previousElement;
 			element.innerHTML = Table.previousValue;
 		});
-  	};
-  
+	};
+
 	// Обробник для помилок, при читанні файлу
-    reader.onerror = function() {
-      	console.log(reader.error);
-    };
+	reader.onerror = function () {
+		console.log(reader.error);
+	};
 }
 

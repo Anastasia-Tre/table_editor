@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
   <title>Table</title>
 </head>
 
 <style>
   .myfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
   }
 
   .th-sort-asc::after {
@@ -23,30 +24,31 @@
 
   .th-sort-desc::after {
     content: "\25be";
-}
+  }
 </style>
 
 <body>
-    <div class="container">
-        <h2>Table Editor</h2>
-	  </div>
-	
-    <div class="container">
-        <div class="row">
-            <label for="myfile" class="waves-effect waves-light btn blue" title="Open file">Open</label>
-            <input type="file" class="myfile" id="myfile" onchange="readFile(this)">
-            <a class="waves-effect waves-light modal-trigger btn blue" href="#modal" id="save" title="Save file">Save</a>
-            <a class="waves-effect waves-light btn blue" id="undo" title="Undo action">&#8630</a>
-        </div>
+  <div class="container">
+    <h2>Table Editor</h2>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <label for="myfile" class="waves-effect waves-light btn blue" title="Open file">Open</label>
+      <input type="file" class="myfile" id="myfile" onchange="readFile(this)">
+      <a class="waves-effect waves-light modal-trigger btn blue" href="#modal" id="save" title="Save file">Save</a>
+      <a class="waves-effect waves-light btn blue" id="undo" title="Undo action">&#8630</a>
     </div>
+  </div>
 
-    <div class="container" id='table_container'></div>
+  <div class="container" id='table_container'></div>
 
-    <div id="modal-container"></div>
+  <div id="modal-container"></div>
 
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    <script src="Table.js"></script>
-    <script src="Editor.js"></script>
-    <script src="./index.js"></script>
+  <script type="text/javascript" src="./materialize/js/materialize.min.js"></script>
+  <script src="./Table.js"></script>
+  <script src="./Editor.js"></script>
+  <script src="./index.js"></script>
 </body>
+
 </html>
