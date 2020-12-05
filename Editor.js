@@ -3,6 +3,7 @@
 // изменить разбиение с запятой на табуляцию
 
 class Editor {
+    // Метод для перетворення тексту файла в масив даних
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
         const data = dataArray.map((value) => value.split(','));
@@ -10,6 +11,7 @@ class Editor {
         return { data: data.slice(1), headers };
     }
 
+    // Метод для перетворення таблиці в текст
     tableToText(headers, rows) {
         let text = '';
         
@@ -25,13 +27,14 @@ class Editor {
 			const cellsOfRow = elem.children;
 			for (let j = 0; j < cellsOfRow.length; j++) {
 				const cell = cellsOfRow[j].innerHTML;
-				text += (j == cellsOfRow.length-1) ? cell : cell + ',';
+				text += (j == cellsOfRow.length - 1) ? cell : cell + ',';
 			}
 			text += (i == rows.length-1) ? '' : '\n';
         }
         return text;
     }
 
+    // Метод для завантаження файла
     download(filename, text) {
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));

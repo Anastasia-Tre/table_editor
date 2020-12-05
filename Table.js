@@ -7,7 +7,6 @@ class Table {
 
 	// Створення таблиці
     constructor(name, data) {
-
 		this.filename = name;
 		
 		this.elemTable = document.createElement('table');
@@ -63,7 +62,6 @@ class Table {
 					}
 					newTable.openModal(options);
 				});
-				
 				elemRow.append(elemCell);
 			}
 		}
