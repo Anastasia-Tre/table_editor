@@ -135,10 +135,18 @@ class Table {
 		});
 
 		// Обробник для кнопки SAVE модального вінка
-		saveBtn.addEventListener('click', () => {
+		const saveFn = () => {
 			argForFn.modalInput = modalInput.value;
 			fnForBtn(argForFn);
 			container.innerHTML = '';
+		};
+		saveBtn.addEventListener('click', saveFn);
+		// Обробник для Enter
+		document.addEventListener("keydown", function(event) {
+			if (event.code === "Enter") {
+				saveFn();
+			  	event.preventDefault();
+			}
 		});
 	}
 

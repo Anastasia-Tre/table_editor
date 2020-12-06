@@ -2,6 +2,8 @@
 
 let newTable, newEditor;
 
+
+
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
 function readFile(input) {
 	let file = input.files[0];
@@ -49,9 +51,17 @@ function readFile(input) {
 
 		// Обробник для кнопки UNDO, відміна останньої дії
 		const undoBtn = document.getElementById('undo');
-		undoBtn.addEventListener('click', function () {
+		const undoFn = function () {
 			const element = Table.previousElement;
 			element.innerHTML = Table.previousValue;
+		};
+		undoBtn.addEventListener('click', undoFn);
+		// Обробник для відміни дії при натисканні Ctrl + Z
+		document.addEventListener("keydown", function(event) {
+			if (event.ctrlKey && event.code === "KeyZ") {
+				undoFn();
+			  	event.preventDefault();
+			}
 		});
 	};
 
