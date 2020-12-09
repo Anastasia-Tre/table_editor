@@ -14,12 +14,10 @@
     "table"
   ],
   "author": "Trembach Anastasiya",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Anastasia-Tre/test/issues"
   },
   "homepage": "https://github.com/Anastasia-Tre/test#readme",
-  "dependencies": {
-    "browserify": "^17.0.0"
-  }
+  "dependencies": {}
 }
