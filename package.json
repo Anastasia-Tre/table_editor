@@ -1,0 +1,25 @@
+{
+  "name": "table_editor",
+  "version": "1.0.0",
+  "description": "simple table editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anastasia-Tre/test.git"
+  },
+  "keywords": [
+    "table"
+  ],
+  "author": "Trembach Anastasiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anastasia-Tre/test/issues"
+  },
+  "homepage": "https://github.com/Anastasia-Tre/test#readme",
+  "dependencies": {
+    "browserify": "^17.0.0"
+  }
+}
