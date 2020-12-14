@@ -1,12 +1,10 @@
 'use strict';
 
-// изменить разбиение с запятой на табуляцию
-
 class Editor {
     // Метод для перетворення тексту файла в масив даних
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
-        const data = dataArray.map(value => value.split(','));
+        const data = dataArray.map(value => value.split(/\t/));
         const headers = data.slice(0, 1)[0];
         return { data: data.slice(1), headers };
     }
@@ -18,7 +16,7 @@ class Editor {
         for (let i = 0; i < headers.length; i++) {
             const elem = headers[i];
             const cell = elem.innerHTML;
-            text += (i === headers.length - 1) ? cell : cell + ',';
+            text += (i === headers.length - 1) ? cell : cell + '\t';
         }
         text += '\n';
 
@@ -27,7 +25,7 @@ class Editor {
             const cellsOfRow = elem.children;
             for (let j = 0; j < cellsOfRow.length; j++) {
                 const cell = cellsOfRow[j].innerHTML;
-                text += (j === cellsOfRow.length - 1) ? cell : cell + ',';
+                text += (j === cellsOfRow.length - 1) ? cell : cell + '\t';
             }
             text += (i === rows.length - 1) ? '' : '\n';
         }

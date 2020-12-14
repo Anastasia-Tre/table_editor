@@ -77,4 +77,3 @@ function readFile(input) {
         console.log(reader.error);
     };
 }
-

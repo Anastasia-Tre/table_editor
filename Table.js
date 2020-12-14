@@ -45,7 +45,7 @@ class Table {
 			for (let i = 0; i < this.elemHeader.children[0].children.length; i++) {
 				const elemCell = document.createElement('td');
 				elemCell.classList.add('modal-trigger');
-				elemCell.setAttribute("href", "#modal")
+				elemCell.setAttribute("href", "#modal");
 				elemCell.innerHTML = row[i] || '';
 				elemCell.addEventListener('click', () => {
 					const element = elemCell;
@@ -76,8 +76,8 @@ class Table {
 		const sortedRows = rows.sort((a, b) => {
 			let aCol = a.querySelector(`td:nth-child(${column + 1})`).textContent;
 			let bCol = b.querySelector(`td:nth-child(${column + 1})`).textContent;
-			aCol = parseInt(aCol) || aCol.trim();
-			bCol = parseInt(bCol) || bCol.trim();
+			aCol = parseInt(aCol, 10) || aCol.trim();
+			bCol = parseInt(bCol, 10) || bCol.trim();
 			return aCol > bCol ? (1 * mod) : (-1 * mod);
 		});
 
@@ -149,7 +149,6 @@ class Table {
 			}
 		});
 	}
-
 }
 
 module.exports = Table;

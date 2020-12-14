@@ -1,13 +1,11 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-// изменить разбиение с запятой на табуляцию
-
 class Editor {
     // Метод для перетворення тексту файла в масив даних
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
-        const data = dataArray.map(value => value.split(','));
+        const data = dataArray.map(value => value.split(/\t/));
         const headers = data.slice(0, 1)[0];
         return { data: data.slice(1), headers };
     }
@@ -19,7 +17,7 @@ class Editor {
         for (let i = 0; i < headers.length; i++) {
             const elem = headers[i];
             const cell = elem.innerHTML;
-            text += (i === headers.length - 1) ? cell : cell + ',';
+            text += (i === headers.length - 1) ? cell : cell + '\t';
         }
         text += '\n';
 
@@ -28,7 +26,7 @@ class Editor {
             const cellsOfRow = elem.children;
             for (let j = 0; j < cellsOfRow.length; j++) {
                 const cell = cellsOfRow[j].innerHTML;
-                text += (j === cellsOfRow.length - 1) ? cell : cell + ',';
+                text += (j === cellsOfRow.length - 1) ? cell : cell + '\t';
             }
             text += (i === rows.length - 1) ? '' : '\n';
         }
@@ -98,7 +96,7 @@ class Table {
 			for (let i = 0; i < this.elemHeader.children[0].children.length; i++) {
 				const elemCell = document.createElement('td');
 				elemCell.classList.add('modal-trigger');
-				elemCell.setAttribute("href", "#modal")
+				elemCell.setAttribute("href", "#modal");
 				elemCell.innerHTML = row[i] || '';
 				elemCell.addEventListener('click', () => {
 					const element = elemCell;
@@ -129,8 +127,8 @@ class Table {
 		const sortedRows = rows.sort((a, b) => {
 			let aCol = a.querySelector(`td:nth-child(${column + 1})`).textContent;
 			let bCol = b.querySelector(`td:nth-child(${column + 1})`).textContent;
-			aCol = parseInt(aCol) || aCol.trim();
-			bCol = parseInt(bCol) || bCol.trim();
+			aCol = parseInt(aCol, 10) || aCol.trim();
+			bCol = parseInt(bCol, 10) || bCol.trim();
 			return aCol > bCol ? (1 * mod) : (-1 * mod);
 		});
 
@@ -202,7 +200,6 @@ class Table {
 			}
 		});
 	}
-
 }
 
 module.exports = Table;
@@ -287,6 +284,5 @@ function readFile(input) {
         console.log(reader.error);
     };
 }
-
 
 },{"./Editor.js":1,"./Table.js":2}]},{},[3]);
