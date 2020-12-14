@@ -11,7 +11,7 @@
   "rules": {
     "indent": [
       "error",
-      2,
+      4,
       { "SwitchCase": 1 }
     ],
     "linebreak-style": [
@@ -93,7 +93,7 @@
     "max-len": [
       "error",
       {
-        "code": 80,
+        "code": 100,
         "ignoreUrls": true
       }
     ],

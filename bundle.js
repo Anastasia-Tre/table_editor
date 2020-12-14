@@ -7,7 +7,7 @@ class Editor {
     // Метод для перетворення тексту файла в масив даних
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
-        const data = dataArray.map((value) => value.split(','));
+        const data = dataArray.map(value => value.split(','));
         const headers = data.slice(0, 1)[0];
         return { data: data.slice(1), headers };
     }
@@ -19,7 +19,7 @@ class Editor {
         for (let i = 0; i < headers.length; i++) {
             const elem = headers[i];
             const cell = elem.innerHTML;
-            text += (i == headers.length - 1) ? cell : cell + ',';
+            text += (i === headers.length - 1) ? cell : cell + ',';
         }
         text += '\n';
 
@@ -28,17 +28,18 @@ class Editor {
             const cellsOfRow = elem.children;
             for (let j = 0; j < cellsOfRow.length; j++) {
                 const cell = cellsOfRow[j].innerHTML;
-                text += (j == cellsOfRow.length - 1) ? cell : cell + ',';
+                text += (j === cellsOfRow.length - 1) ? cell : cell + ',';
             }
-            text += (i == rows.length - 1) ? '' : '\n';
+            text += (i === rows.length - 1) ? '' : '\n';
         }
         return text;
     }
 
     // Метод для завантаження файла
     download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        const element = document.createElement('a');
+        element.setAttribute('href',
+            'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
         element.style.display = 'none';
         document.body.appendChild(element);
@@ -209,81 +210,82 @@ module.exports = Table;
 },{}],3:[function(require,module,exports){
 'use strict';
 
-const Editor= require('./Editor.js');
+const Editor = require('./Editor.js');
 const Table = require('./Table.js');
 
 let newTable, newEditor;
 
 const btnOpen = document.getElementById('myfile');
 btnOpen.addEventListener('change', function() {
-	readFile(this);
+    readFile(this);
 });
 
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
 function readFile(input) {
-	let file = input.files[0];
-	let reader = new FileReader();
+    const file = input.files[0];
+    const reader = new FileReader();
 
-	// Читання файлу
-	reader.readAsText(file);
+    // Читання файлу
+    reader.readAsText(file);
 
-	// Після завантаження файла, створюються екземпляри класів Editor i Table
-	reader.onload = function () {
-		newEditor = new Editor();
-		const data = newEditor.parseFile(reader.result);
-		newTable = new Table(file.name, data);
+    // Після завантаження файла, створюються екземпляри класів Editor i Table
+    reader.onload = function() {
+        newEditor = new Editor();
+        const data = newEditor.parseFile(reader.result);
+        newTable = new Table(file.name, data);
 
-		// Обробник для сортавування даних в колонках
-		document.querySelectorAll(".sort").forEach(headerCell => {
-			headerCell.addEventListener("click", () => {
-				const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-				const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+        // Обробник для сортавування даних в колонках
+        document.querySelectorAll('.sort').forEach(headerCell => {
+            headerCell.addEventListener('click', () => {
+                const headerIndex = Array.prototype.indexOf.call(
+                    headerCell.parentElement.children, headerCell);
+                const currentIsAscending = headerCell.classList.contains('th-sort-asc');
 
-				newTable.sortTableByColumn(headerIndex, !currentIsAscending);
-			});
-		});
+                newTable.sortTableByColumn(headerIndex, !currentIsAscending);
+            });
+        });
 
-		// Обробник для кнопки SAVE, збереження файлу
-		const saveBtn = document.getElementById('save');
-		saveBtn.addEventListener('click', function () {
-			const headers = newTable.elemHeader.querySelectorAll("th");
-			const rows = newTable.elemBody.querySelectorAll("tr");
-			let text = newEditor.tableToText(headers, rows);
-			const filename = newTable.filename;
+        // Обробник для кнопки SAVE, збереження файлу
+        const saveBtn = document.getElementById('save');
+        saveBtn.addEventListener('click', () => {
+            const headers = newTable.elemHeader.querySelectorAll('th');
+            const rows = newTable.elemBody.querySelectorAll('tr');
+            const text = newEditor.tableToText(headers, rows);
+            const filename = newTable.filename;
 
-			const options = {
-				argForFn: { filename, text },
-				defaultValue: filename,
-				headerText: 'Save as',
-				btnText: 'Save',
-				fnForBtn: ({ filename, text, modalInput }) => {
-					const newFilename = modalInput || filename;
-					newEditor.download(newFilename, text);
-				}
-			}
-			newTable.openModal(options);
-		}, false);
+            const options = {
+                argForFn: { filename, text },
+                defaultValue: filename,
+                headerText: 'Save as',
+                btnText: 'Save',
+                fnForBtn: ({ filename, text, modalInput }) => {
+                    const newFilename = modalInput || filename;
+                    newEditor.download(newFilename, text);
+                }
+            };
+            newTable.openModal(options);
+        }, false);
 
-		// Обробник для кнопки UNDO, відміна останньої дії
-		const undoBtn = document.getElementById('undo');
-		const undoFn = function () {
-			const element = Table.previousElement;
-			element.innerHTML = Table.previousValue;
-		};
-		undoBtn.addEventListener('click', undoFn);
-		// Обробник для відміни дії при натисканні Ctrl + Z
-		document.addEventListener("keydown", function(event) {
-			if (event.ctrlKey && event.code === "KeyZ") {
-				undoFn();
-			  	event.preventDefault();
-			}
-		});
-	};
+        // Обробник для кнопки UNDO, відміна останньої дії
+        const undoBtn = document.getElementById('undo');
+        const undoFn = function() {
+            const element = Table.previousElement;
+            element.innerHTML = Table.previousValue;
+        };
+        undoBtn.addEventListener('click', undoFn);
+        // Обробник для відміни дії при натисканні Ctrl + Z
+        document.addEventListener('keydown', event => {
+            if (event.ctrlKey && event.code === 'KeyZ') {
+                undoFn();
+                event.preventDefault();
+            }
+        });
+    };
 
-	// Обробник для помилок, при читанні файлу
-	reader.onerror = function () {
-		console.log(reader.error);
-	};
+    // Обробник для помилок, при читанні файлу
+    reader.onerror = function() {
+        console.log(reader.error);
+    };
 }
 
 

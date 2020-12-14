@@ -2,54 +2,52 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-  <title>Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
+    <title>Table</title>
 </head>
 
 <style>
-  .myfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
+    .myfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
 
-  .th-sort-asc::after {
-    content: "\25b4";
-  }
+    .th-sort-asc::after {
+        content: "\25b4";
+    }
 
-  .th-sort-desc::after {
-    content: "\25be";
-  }
+    .th-sort-desc::after {
+        content: "\25be";
+    }
 </style>
 
 <body>
-  <div class="container">
-    <h2>Table Editor</h2>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <label for="myfile" class="waves-effect waves-light btn blue" title="Open file">Open</label>
-      <input type="file" class="myfile" id="myfile">
-      <a class="waves-effect waves-light modal-trigger btn blue" href="#modal" id="save" title="Save file">Save</a>
-      <a class="waves-effect waves-light btn blue" id="undo" title="Undo action">&#8630</a>
+    <div class="container">
+        <h2>Table Editor</h2>
     </div>
-  </div>
 
-  <div class="container" id='table_container'></div>
+    <div class="container">
+        <div class="row">
+            <label for="myfile" class="waves-effect waves-light btn blue" title="Open file">Open</label>
+            <input type="file" class="myfile" id="myfile">
+            <a class="waves-effect waves-light modal-trigger btn blue" href="#modal" id="save"
+                title="Save file">Save</a>
+            <a class="waves-effect waves-light btn blue" id="undo" title="Undo action">&#8630</a>
+        </div>
+    </div>
 
-  <div id="modal-container"></div>
+    <div class="container" id='table_container'></div>
 
-  <script type="text/javascript" src="./materialize/js/materialize.min.js"></script>
-  <!-- <script src="./Table.js"></script>
-  <script src="./Editor.js"></script>
-  <script src="./index.js"></script> -->
-  <script src="./bundle.js"></script>
+    <div id="modal-container"></div>
+
+    <script type="text/javascript" src="./materialize/js/materialize.min.js"></script>
+    <script src="./bundle.js"></script>
 </body>
 
 </html>
