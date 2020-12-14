@@ -45,3 +45,5 @@ class Editor {
         document.body.removeChild(element);
     }
 }
+
+module.exports = Editor;

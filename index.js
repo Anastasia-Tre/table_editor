@@ -1,8 +1,14 @@
 'use strict';
 
+const Editor= require('./Editor.js');
+const Table = require('./Table.js');
+
 let newTable, newEditor;
 
-
+const btnOpen = document.getElementById('myfile');
+btnOpen.addEventListener('change', function() {
+	readFile(this);
+});
 
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
 function readFile(input) {
