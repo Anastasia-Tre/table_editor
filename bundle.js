@@ -129,6 +129,10 @@ class Table {
 			let bCol = b.querySelector(`td:nth-child(${column + 1})`).textContent;
 			aCol = parseInt(aCol, 10) || aCol.trim();
 			bCol = parseInt(bCol, 10) || bCol.trim();
+			if (typeof aCol !== typeof bCol) {
+				if (typeof aColl === 'int') return (-1 * mod);
+				else return (1 * mod);
+			}
 			return aCol > bCol ? (1 * mod) : (-1 * mod);
 		});
 
