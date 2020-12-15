@@ -1,11 +1,25 @@
 'use strict';
+/**
+ * @file Code of the class Table
+ * @author Anastasiya Trembach
+ * 
+ */
 
+
+/**
+ * Class representing a table
+ */
 class Table {
-
+	
 	static previousElement;
 	static previousValue;
 
 	// Створення таблиці
+	/**
+	 * Create a table
+	 * @param {string} name - Name of file
+	 * @param {object} data - Data of file
+	 */
 	constructor(name, data) {
 		this.filename = name;
 
@@ -24,6 +38,10 @@ class Table {
 	}
 
 	// Створення рядку заколовків таблиці
+	/**
+	 * Create a header of table
+	 * @param {object} array - Array of headers of the table
+	 */
 	createHeader(array) {
 		const elemRow = document.createElement('tr');
 		this.elemHeader.append(elemRow);
@@ -37,6 +55,10 @@ class Table {
 	}
 
 	// Створення рядків таблиці
+	/**
+	 * Create rows of table
+	 * @param {object} array - Array of rows
+	 */
 	createRow(array) {
 		for (let row of array) {
 			const elemRow = document.createElement('tr');
@@ -68,8 +90,13 @@ class Table {
 	}
 
 	// Сортування таблиці
+	/**
+	 * Sort the table
+	 * @param {int} column - Number of column, that is sorted
+	 * @param {boolean} asc - Identifier for sorting in direct or reverse order
+	 */
 	sortTableByColumn(column, asc = true) {
-		const mod = asc ? 1 : -1; // Індитифікатор для сортування за прямим або оберненим порядком
+		const mod = asc ? 1 : -1; // Індетифікатор для сортування за прямим або оберненим порядком
 		const rows = Array.from(this.elemBody.querySelectorAll("tr"));
 
 		// Сортування кожного рядка
@@ -97,6 +124,10 @@ class Table {
 	}
 
 	// Створення модального вінка
+	/**
+	 * Create a modal window
+	 * @param {object} options - Object of params {argForFn, defaultValue, fnForBtn, headerText, btnText}
+	 */
 	openModal(options) {
 		const { argForFn, defaultValue, fnForBtn, headerText, btnText } = options;
 

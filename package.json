@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Anastasia-Tre/test#readme",
   "dependencies": {
-    "browserify": "^17.0.0"
+    "browserify": "^17.0.0",
+    "jsdoc": "^3.6.6"
   }
 }
