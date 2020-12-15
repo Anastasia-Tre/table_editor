@@ -1,7 +1,6 @@
 'use strict';
 
-const Editor = require('./Editor.js');
-const Table = require('./Table.js');
+const { ModalToSave, ModalToChange, Table, Editor } =  require('./Modal');
 
 let newTable, newEditor;
 
@@ -53,7 +52,8 @@ function readFile(input) {
                     newEditor.download(newFilename, text);
                 }
             };
-            newTable.openModal(options);
+            //newTable.openModal(options);
+            const modal = new ModalToSave(filename, options.argForFn);
         }, false);
 
         // Обробник для кнопки UNDO, відміна останньої дії
