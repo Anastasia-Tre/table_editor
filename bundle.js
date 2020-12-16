@@ -257,7 +257,7 @@ module.exports = Table;
 },{}],3:[function(require,module,exports){
 'use strict';
 
-const Editor = require('./Editor.js');
+const Editor = require('./src/Editor.js');
 const Table = require('./Table.js');
 
 let newTable, newEditor;

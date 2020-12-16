@@ -11,7 +11,6 @@ class Table {
 	// Створення таблиці
 	/**
 	 * Create a table
-	 * @constructor
 	 * @param {string} name - Name of file
 	 * @param {object} data - Data of file
 	 */
