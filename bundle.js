@@ -1,8 +1,17 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
+/**
+ * Class representing a tool Editor
+ */
 class Editor {
     // Метод для перетворення тексту файла в масив даних
+    /**
+     * Convert a file into two arrays: array of rows of the table
+     * and array of the headers of the table
+     * @param {string} file - file of data
+     * @returns {object} - with fields: data(rows) and headers
+     */
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
         const data = dataArray.map(value => value.split(/\t/));
@@ -11,6 +20,12 @@ class Editor {
     }
 
     // Метод для перетворення таблиці в текст
+    /**
+     * Convert a table from html to string with tabs for saving in the file
+     * @param {object} headers - array of headers of the table
+     * @param {object} rows - array of rows of the table
+     * @returns {string} - string containing table with tabs, ready to download
+     */
     tableToText(headers, rows) {
         let text = '';
 
@@ -34,6 +49,11 @@ class Editor {
     }
 
     // Метод для завантаження файла
+    /**
+     * Method for downloading the table
+     * @param {string} filename - name of file to save
+     * @param {string} text - file to save
+     */
     download(filename, text) {
         const element = document.createElement('a');
         element.setAttribute('href',
@@ -51,12 +71,21 @@ module.exports = Editor;
 },{}],2:[function(require,module,exports){
 'use strict';
 
+/**
+ * Class representing a Table
+ */
 class Table {
-
+	
 	static previousElement;
 	static previousValue;
 
 	// Створення таблиці
+	/**
+	 * Create a table
+	 * @constructor
+	 * @param {string} name - Name of file
+	 * @param {object} data - Data of file
+	 */
 	constructor(name, data) {
 		this.filename = name;
 
@@ -75,6 +104,10 @@ class Table {
 	}
 
 	// Створення рядку заколовків таблиці
+	/**
+	 * Create a header of table
+	 * @param {object} array - Array of headers of the table
+	 */
 	createHeader(array) {
 		const elemRow = document.createElement('tr');
 		this.elemHeader.append(elemRow);
@@ -88,6 +121,10 @@ class Table {
 	}
 
 	// Створення рядків таблиці
+	/**
+	 * Create rows of table
+	 * @param {object} array - Array of rows
+	 */
 	createRow(array) {
 		for (let row of array) {
 			const elemRow = document.createElement('tr');
@@ -119,8 +156,13 @@ class Table {
 	}
 
 	// Сортування таблиці
+	/**
+	 * Sort the table
+	 * @param {int} column - Number of column, that is sorted
+	 * @param {boolean} asc - Identifier for sorting in direct or reverse order
+	 */
 	sortTableByColumn(column, asc = true) {
-		const mod = asc ? 1 : -1; // Індитифікатор для сортування за прямим або оберненим порядком
+		const mod = asc ? 1 : -1; // Індетифікатор для сортування за прямим або оберненим порядком
 		const rows = Array.from(this.elemBody.querySelectorAll("tr"));
 
 		// Сортування кожного рядка
@@ -148,6 +190,10 @@ class Table {
 	}
 
 	// Створення модального вінка
+	/**
+	 * Create a modal window
+	 * @param {object} options - Object of params {argForFn, defaultValue, fnForBtn, headerText, btnText}
+	 */
 	openModal(options) {
 		const { argForFn, defaultValue, fnForBtn, headerText, btnText } = options;
 

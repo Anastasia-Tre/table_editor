@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Class representing a table
+ * Class representing a Table
  */
 class Table {
 	

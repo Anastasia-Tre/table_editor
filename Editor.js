@@ -1,7 +1,16 @@
 'use strict';
 
+/**
+ * Class representing a tool Editor
+ */
 class Editor {
     // Метод для перетворення тексту файла в масив даних
+    /**
+     * Convert a file into two arrays: array of rows of the table
+     * and array of the headers of the table
+     * @param {string} file - file of data
+     * @returns {object} - with fields: data(rows) and headers
+     */
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
         const data = dataArray.map(value => value.split(/\t/));
@@ -10,6 +19,12 @@ class Editor {
     }
 
     // Метод для перетворення таблиці в текст
+    /**
+     * Convert a table from html to string with tabs for saving in the file
+     * @param {object} headers - array of headers of the table
+     * @param {object} rows - array of rows of the table
+     * @returns {string} - string containing table with tabs, ready to download
+     */
     tableToText(headers, rows) {
         let text = '';
 
@@ -33,6 +48,11 @@ class Editor {
     }
 
     // Метод для завантаження файла
+    /**
+     * Method for downloading the table
+     * @param {string} filename - name of file to save
+     * @param {string} text - file to save
+     */
     download(filename, text) {
         const element = document.createElement('a');
         element.setAttribute('href',
