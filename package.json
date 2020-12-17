@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo test",
-    "build-app": "browserify index.js -o bundle.js",
-    "docs-html": "jsdoc Table.js Editor.js",
-    "docs-md-table": "documentation readme Table.js --section='API Table'",
-    "docs-md-editor": "documentation readme Editor.js --section='API Editor'"
+    "build": "browserify index.js -o bundle.js",
+    "docs-html": "jsdoc Table.js Editor.js index.js readme2.md",
+    "docs-md": "documentation readme index.js --section=API"
   },
   "repository": {
     "type": "git",

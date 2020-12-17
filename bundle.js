@@ -268,8 +268,8 @@ btnOpen.addEventListener('change', function() {
 
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
 /**
- * 
- * @param {*} input - 
+ * Start function of app, execute all main operation with file
+ * @param {pbject} input - html object - selected file to work with
  */
 function readFile(input) {
     console.log(typeof input);
