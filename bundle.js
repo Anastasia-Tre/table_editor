@@ -10,7 +10,7 @@ class Editor {
      * Convert a file into two arrays: array of rows of the table
      * and array of the headers of the table
      * @param {string} file - file of data
-     * @returns {object} - with fields: data(rows) and headers
+     * @returns {object} Object with fields: data(rows) and headers
      */
     parseFile(file) {
         const dataArray = file.split(/\r?\n/);
@@ -24,7 +24,7 @@ class Editor {
      * Convert a table from html to string with tabs for saving in the file
      * @param {object} headers - array of headers of the table
      * @param {object} rows - array of rows of the table
-     * @returns {string} - string containing table with tabs, ready to download
+     * @returns {string} String containing table with tabs, ready to download
      */
     tableToText(headers, rows) {
         let text = '';
@@ -267,7 +267,13 @@ btnOpen.addEventListener('change', function() {
 });
 
 // Функція викликається при натисненні на кнопку OPEN, після вибору файлу
+/**
+ * 
+ * @param {*} input - 
+ */
 function readFile(input) {
+    console.log(typeof input);
+    console.log(input);
     const file = input.files[0];
     const reader = new FileReader();
 
