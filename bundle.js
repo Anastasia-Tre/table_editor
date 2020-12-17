@@ -82,7 +82,6 @@ class Table {
 	// Створення таблиці
 	/**
 	 * Create a table
-	 * @constructor
 	 * @param {string} name - Name of file
 	 * @param {object} data - Data of file
 	 */
@@ -192,7 +191,7 @@ class Table {
 	// Створення модального вінка
 	/**
 	 * Create a modal window
-	 * @param {object} options - Object of params {argForFn, defaultValue, fnForBtn, headerText, btnText}
+	 * @param {object} options - Object with fields: {argForFn, defaultValue, fnForBtn, headerText, btnText}
 	 */
 	openModal(options) {
 		const { argForFn, defaultValue, fnForBtn, headerText, btnText } = options;
@@ -257,7 +256,7 @@ module.exports = Table;
 },{}],3:[function(require,module,exports){
 'use strict';
 
-const Editor = require('./src/Editor.js');
+const Editor = require('./Editor.js');
 const Table = require('./Table.js');
 
 let newTable, newEditor;
