@@ -4,7 +4,11 @@
   "description": "simple table editor",
   "main": "index.js",
   "scripts": {
-    "test": "echo test"
+    "test": "echo test",
+    "build": "browserify index.js -o bundle.js",
+    "docs-html": "jsdoc src/Table.js src/Editor.js",
+    "docs-md-table": "documentation readme Table.js --section='API Table'",
+    "docs-md-editor": "documentation readme Editor.js --section='API Editor'"
   },
   "repository": {
     "type": "git",

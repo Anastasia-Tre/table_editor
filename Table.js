@@ -120,7 +120,7 @@ class Table {
 	// Створення модального вінка
 	/**
 	 * Create a modal window
-	 * @param {object} options - Object of params {argForFn, defaultValue, fnForBtn, headerText, btnText}
+	 * @param {object} options - Object with fields: {argForFn, defaultValue, fnForBtn, headerText, btnText}
 	 */
 	openModal(options) {
 		const { argForFn, defaultValue, fnForBtn, headerText, btnText } = options;
