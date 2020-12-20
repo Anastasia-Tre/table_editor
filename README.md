@@ -2,12 +2,13 @@
 
 Table Editor to make main operation with file of table, that has delimiter - tab. 
 Possible operation:
- - upload selected file to editor
- - download changed file
- - browse content of table
- - change content of rows in table
- - change name of file with table
- - sort columns of table
+
+-   upload selected file to editor
+-   download changed file
+-   browse content of table
+-   change content of rows in table
+-   change name of file with table
+-   sort columns of table
 
 # API
 
@@ -18,22 +19,23 @@ Possible operation:
 -   [readFile](#readfile)
     -   [Parameters](#parameters)
 -   [Editor](#editor)
+    -   [Parameters](#parameters-1)
     -   [parseFile](#parsefile)
-        -   [Parameters](#parameters-1)
-    -   [tableToText](#tabletotext)
         -   [Parameters](#parameters-2)
-    -   [download](#download)
+    -   [tableToText](#tabletotext)
         -   [Parameters](#parameters-3)
+    -   [download](#download)
+        -   [Parameters](#parameters-4)
 -   [Table](#table)
-    -   [Parameters](#parameters-4)
+    -   [Parameters](#parameters-5)
     -   [createHeader](#createheader)
-        -   [Parameters](#parameters-5)
-    -   [createRow](#createrow)
         -   [Parameters](#parameters-6)
-    -   [sortTableByColumn](#sorttablebycolumn)
+    -   [createRow](#createrow)
         -   [Parameters](#parameters-7)
-    -   [openModal](#openmodal)
+    -   [sortTableByColumn](#sorttablebycolumn)
         -   [Parameters](#parameters-8)
+    -   [openModal](#openmodal)
+        -   [Parameters](#parameters-9)
 
 ## readFile
 
@@ -46,6 +48,10 @@ Start function of app, execute all main operation with file
 ## Editor
 
 Class representing a tool Editor
+
+### Parameters
+
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of file
 
 ### parseFile
 
@@ -84,7 +90,6 @@ Class representing a Table
 
 ### Parameters
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of file
 -   `data` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Data of file
 
 ### createHeader
@@ -119,4 +124,3 @@ Create a modal window
 #### Parameters
 
 -   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Object with fields: {argForFn, defaultValue, fnForBtn, headerText, btnText}
-

@@ -11,11 +11,9 @@ class Table {
 	// Створення таблиці
 	/**
 	 * Create a table
-	 * @param {string} name - Name of file
 	 * @param {object} data - Data of file
 	 */
-	constructor(name, data) {
-		this.filename = name;
+	constructor(data) {
 
 		this.elemTable = document.createElement('table');
 		this.elemTable.classList.add('highlight');
@@ -103,7 +101,8 @@ class Table {
 				if (typeof aColl === 'int') return (-1 * mod);
 				else return (1 * mod);
 			}
-			return aCol > bCol ? (1 * mod) : (-1 * mod);
+			else if (aCol > bCol) return (1 * mod);
+			else return (-1 * mod);
 		});
 
 		// Видалення всіх рядків таблиці і
@@ -170,11 +169,15 @@ class Table {
 			container.innerHTML = '';
 		};
 		saveBtn.addEventListener('click', saveFn);
-		// Обробник для Enter
-		document.addEventListener("keydown", function(event) {
-			if (event.code === "Enter") {
+		// Обробник для Enter і Escape
+		document.addEventListener('keyup', function(event) {
+			if (event.key === 'Enter') {
 				saveFn();
 			  	event.preventDefault();
+			}
+			if (event.key === 'Escape') {
+				container.innerHTML = '';
+				event.preventDefault();
 			}
 		});
 	}

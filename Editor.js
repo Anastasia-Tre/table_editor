@@ -4,6 +4,15 @@
  * Class representing a tool Editor
  */
 class Editor {
+
+    /**
+     * Create editor
+     * @param {string} name - Name of file
+     */
+    constructor(name) {
+        this.filename = name;
+    }
+
     // Метод для перетворення тексту файла в масив даних
     /**
      * Convert a file into two arrays: array of rows of the table

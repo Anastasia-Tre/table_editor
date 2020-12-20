@@ -4,7 +4,6 @@
   "description": "simple table editor",
   "main": "index.js",
   "scripts": {
-    "test": "echo test",
     "build": "browserify index.js -o bundle.js",
     "docs-html": "jsdoc Table.js Editor.js index.js readme2.md",
     "docs-md": "documentation readme index.js --section=API"

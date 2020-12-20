@@ -5,6 +5,15 @@
  * Class representing a tool Editor
  */
 class Editor {
+
+    /**
+     * Create editor
+     * @param {string} name - Name of file
+     */
+    constructor(name) {
+        this.filename = name;
+    }
+
     // Метод для перетворення тексту файла в масив даних
     /**
      * Convert a file into two arrays: array of rows of the table
@@ -82,11 +91,9 @@ class Table {
 	// Створення таблиці
 	/**
 	 * Create a table
-	 * @param {string} name - Name of file
 	 * @param {object} data - Data of file
 	 */
-	constructor(name, data) {
-		this.filename = name;
+	constructor(data) {
 
 		this.elemTable = document.createElement('table');
 		this.elemTable.classList.add('highlight');
@@ -174,7 +181,8 @@ class Table {
 				if (typeof aColl === 'int') return (-1 * mod);
 				else return (1 * mod);
 			}
-			return aCol > bCol ? (1 * mod) : (-1 * mod);
+			else if (aCol > bCol) return (1 * mod);
+			else return (-1 * mod);
 		});
 
 		// Видалення всіх рядків таблиці і
@@ -241,11 +249,15 @@ class Table {
 			container.innerHTML = '';
 		};
 		saveBtn.addEventListener('click', saveFn);
-		// Обробник для Enter
-		document.addEventListener("keydown", function(event) {
-			if (event.code === "Enter") {
+		// Обробник для Enter і Escape
+		document.addEventListener('keyup', function(event) {
+			if (event.key === 'Enter') {
 				saveFn();
 			  	event.preventDefault();
+			}
+			if (event.key === 'Escape') {
+				container.innerHTML = '';
+				event.preventDefault();
 			}
 		});
 	}
@@ -272,8 +284,6 @@ btnOpen.addEventListener('change', function() {
  * @param {pbject} input - html object - selected file to work with
  */
 function readFile(input) {
-    console.log(typeof input);
-    console.log(input);
     const file = input.files[0];
     const reader = new FileReader();
 
@@ -282,9 +292,9 @@ function readFile(input) {
 
     // Після завантаження файла, створюються екземпляри класів Editor i Table
     reader.onload = function() {
-        newEditor = new Editor();
+        newEditor = new Editor(file.name);
         const data = newEditor.parseFile(reader.result);
-        newTable = new Table(file.name, data);
+        newTable = new Table(data);
 
         // Обробник для сортавування даних в колонках
         document.querySelectorAll('.sort').forEach(headerCell => {
@@ -303,7 +313,7 @@ function readFile(input) {
             const headers = newTable.elemHeader.querySelectorAll('th');
             const rows = newTable.elemBody.querySelectorAll('tr');
             const text = newEditor.tableToText(headers, rows);
-            const filename = newTable.filename;
+            const filename = newEditor.filename;
 
             const options = {
                 argForFn: { filename, text },
@@ -316,7 +326,7 @@ function readFile(input) {
                 }
             };
             newTable.openModal(options);
-        }, false);
+        });
 
         // Обробник для кнопки UNDO, відміна останньої дії
         const undoBtn = document.getElementById('undo');

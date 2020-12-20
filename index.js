@@ -16,8 +16,6 @@ btnOpen.addEventListener('change', function() {
  * @param {pbject} input - html object - selected file to work with
  */
 function readFile(input) {
-    console.log(typeof input);
-    console.log(input);
     const file = input.files[0];
     const reader = new FileReader();
 
@@ -26,9 +24,9 @@ function readFile(input) {
 
     // Після завантаження файла, створюються екземпляри класів Editor i Table
     reader.onload = function() {
-        newEditor = new Editor();
+        newEditor = new Editor(file.name);
         const data = newEditor.parseFile(reader.result);
-        newTable = new Table(file.name, data);
+        newTable = new Table(data);
 
         // Обробник для сортавування даних в колонках
         document.querySelectorAll('.sort').forEach(headerCell => {
@@ -47,7 +45,7 @@ function readFile(input) {
             const headers = newTable.elemHeader.querySelectorAll('th');
             const rows = newTable.elemBody.querySelectorAll('tr');
             const text = newEditor.tableToText(headers, rows);
-            const filename = newTable.filename;
+            const filename = newEditor.filename;
 
             const options = {
                 argForFn: { filename, text },
@@ -60,7 +58,7 @@ function readFile(input) {
                 }
             };
             newTable.openModal(options);
-        }, false);
+        });
 
         // Обробник для кнопки UNDO, відміна останньої дії
         const undoBtn = document.getElementById('undo');
